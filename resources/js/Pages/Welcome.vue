@@ -1,10 +1,9 @@
-<template>
-  <h1>This is example</h1>
-</template>
-
-<script>
-export default {};
+<script setup>
+import { Link } from '@inertiajs/vue3'
 </script>
+<template>
+  <Link href="login">Login</Link>
+</template>
 
 <style>
 </style>
