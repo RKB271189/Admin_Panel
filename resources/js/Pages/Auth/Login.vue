@@ -5,20 +5,20 @@
         <v-card>
           <v-card-title class="text-center"> Login Form </v-card-title>
           <v-card-text>
-            <v-form @submit="submitForm">
-              <v-text-field
-                v-model="email"
-                label="Username"
-                required
-              ></v-text-field>
-              <v-text-field
-                v-model="password"
-                label="Password"
-                type="password"
-                required
-              ></v-text-field>
-              <v-btn type="submit" color="primary" block>Login</v-btn>
-            </v-form>
+            <v-text-field
+              v-model="email"
+              label="Username"
+              required
+            ></v-text-field>
+            <v-text-field
+              v-model="password"
+              label="Password"
+              type="password"
+              required
+            ></v-text-field>
+            <v-btn type="button" color="primary" @click="verifyUser()" block
+              >Login</v-btn
+            >
           </v-card-text>
         </v-card>
       </v-col>
@@ -27,13 +27,32 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
   data() {
     return {
       email: null,
       password: null,
     };
+  },
+  computed: {
+    ...mapGetters("VerifyUser", ["hasError", "errorMessage"]),
+  },
+  methods: {
+    ...mapActions("VerifyUser", ["VERIFY_USER_CREDENTIALS"]),
+    getParams() {
+      return {
+        email: this.email,
+        password: this.password,
+      };
+    },
+    async verifyUser() {
+      let params = this.getParams();
+      await this.VERIFY_USER_CREDENTIALS(params);
+      if (!this.hasError) {
+        this.$inertia.visit("admin-dashboard", { method: "get" });
+      }
+    },
   },
 };
 </script>

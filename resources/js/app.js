@@ -1,4 +1,8 @@
-import './bootstrap';
+import './bootstrap'
+let token = document.head.querySelector('meta[name="csrf-token"]')
+if (token) {
+    window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content
+}
 import { createApp, h } from 'vue'
 import { createInertiaApp } from '@inertiajs/vue3'
 import { InertiaProgress } from '@inertiajs/progress'
