@@ -81,6 +81,8 @@ export default {
             { title: "Consultant", icon: "mdi-menu-right-outline" },
           ],
         },
+        { title: "Tables", icon: "mdi-cog" },
+        { title: "Forms", icon: "mdi-cog" },
       ],
     };
   },

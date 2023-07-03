@@ -6,15 +6,12 @@
     multi-line
     :color="messageColor"
   >
-    <v-layout align-center pr-4>
-      <v-icon class="pr-3" dark large>{{ responseIcon }}</v-icon>
-      <v-layout column>
-        <div>
-          <strong>{{ responseType }} : </strong>
-        </div>
-        <div>{{ text }}</div>
-      </v-layout>
-    </v-layout>
+    <v-alert
+      :icon="responseIcon"
+      :title="responseType"
+      :text="text"
+      variant="tonal"
+    ></v-alert>   
   </v-snackbar>
 </template>
   <script>
@@ -45,7 +42,7 @@ export default {
     for (let [key, value] of Object.entries(this.responseMessage)) {
       result.push(`${value}`);
     }
-    this.text = result.join(" and ");
+    this.text = result.join("<br/>");
   },
 };
 </script>

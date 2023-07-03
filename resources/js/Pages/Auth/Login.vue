@@ -11,23 +11,33 @@
           <v-card-title class="text-center"> Login Form </v-card-title>
           <v-card-text>
             <v-text-field
+              variant="outlined"
               v-model="email"
               label="Username"
+              :rules="emailRules"
+              clearable
               required
             ></v-text-field>
             <v-text-field
+              class="mt-2"
+              variant="outlined"
               v-model="password"
               label="Password"
-              type="password"
+              :append-inner-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+              :type="showPassword ? 'text' : 'password'"
+              @click:append-inner="showPassword = !showPassword"
+              :rules="passwordRules"
+              clearable
               required
             ></v-text-field>
             <v-btn
               type="button"
               :loading="loading"
-              class="flex-grow-1"
+              class="flex-grow-1 mt-2"
               height="48"
               color="primary"
               @click="verifyUser()"
+              :disabled="!isFormValid"
               block
             >
               <v-icon class="mr-1">mdi-login</v-icon>
@@ -49,6 +59,15 @@ export default {
       loading: false,
       email: null,
       password: null,
+      showPassword: false,
+      emailRules: [
+        (v) => !!v || "E-mail is required",
+        (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
+      ],
+      passwordRules: [
+        (v) => !!v || "Password is required",
+        (v) => v.length >= 6 || "Password must be atleast of 6 characters",
+      ],
     };
   },
   components: {
@@ -61,15 +80,15 @@ export default {
       "hasSuccess",
       "successMessage",
     ]),
-  },
-  beforeUnmount() {
-    this.RESET_TO_INITIAL_STATE();
+    isFormValid() {
+      return (
+        this.emailRules.every((rule) => rule(this.email) === true) &&
+        this.passwordRules.every((rule) => rule(this.password) === true)
+      );
+    },
   },
   methods: {
-    ...mapActions("VerifyUser", [
-      "RESET_TO_INITIAL_STATE",
-      "VERIFY_USER_CREDENTIALS",
-    ]),
+    ...mapActions("VerifyUser", ["VERIFY_USER_CREDENTIALS"]),
     getParams() {
       return {
         email: this.email,

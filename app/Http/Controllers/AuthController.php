@@ -18,10 +18,10 @@ class AuthController extends Controller
                 $token = $user->createToken($user->email);
                 return response()->json(['message' => 'Login successfull', 'token' => $token->plainTextToken], 200);
             } else {
-                return response()->json(['error' => 'The credentials seems invalid'], 403);
+                return response()->json(['error' => 'The credentials provided does not match with the system.'], 403);
             }
         } catch (Exception $ex) {
-            return response()->json(['error' => 'Something went wrong'], 500);
+            return response()->json(['error' => 'Something went wrong. Please try again'], 500);
         }
     }
 }
