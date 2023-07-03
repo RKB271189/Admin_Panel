@@ -36,11 +36,11 @@
               <v-card-title class="alert-warning">
                 <span class="headline">Some Title</span>
                 <v-btn
-                  :loading="false"
+                  :loading="loading"
                   class="flex-grow-1"
                   height="48"
                   variant="tonal"
-                  @click="load"
+                  @click="someAction"
                   style="float: right"
                 >
                   <v-icon class="mr-1">mdi-login</v-icon>
@@ -60,9 +60,11 @@
 import Header from "./Layout/Header.vue";
 import Menu from "./Layout/Menu.vue";
 import CountBox from "../General/Count-Box.vue";
+import { mapGetters, mapActions } from "vuex";
 export default {
   data() {
     return {
+      loading: false,
       pageName: "Dashboard",
     };
   },
@@ -70,6 +72,14 @@ export default {
     Header,
     Menu,
     CountBox,
+  },
+  methods: {
+    ...mapActions("Dashboard", ["SOME_SERVER_ACTION"]),
+    async someAction() {      
+      this.loading = true;
+      await this.SOME_SERVER_ACTION();
+      this.loading = false;
+    },
   },
 };
 </script>

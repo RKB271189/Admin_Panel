@@ -3,6 +3,7 @@ let token = document.head.querySelector('meta[name="csrf-token"]')
 if (token) {
     window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content
 }
+
 import { createApp, h } from 'vue'
 import { createInertiaApp } from '@inertiajs/vue3'
 import { InertiaProgress } from '@inertiajs/progress'
@@ -10,8 +11,9 @@ import { createVuetify } from 'vuetify'
 import 'vuetify/styles'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
-import '@mdi/font/css/materialdesignicons.css';
+import '@mdi/font/css/materialdesignicons.css'
 import store from './store'
+import setupAxiosInterceptors from './service/axios-interceptor'
 const customTheme = {
     dark: false,
     colors: {
@@ -48,6 +50,7 @@ createInertiaApp({
         app.use(vuetify);
         app.use(store);
         app.mount(el);
+        setupAxiosInterceptors(store);
     },
 })
 InertiaProgress.init({ color: '#e08bb1' })
