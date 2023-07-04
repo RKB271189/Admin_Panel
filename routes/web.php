@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TabularController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,6 +29,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/admin-table', function () {
         return inertia('Admin/Tabular');
     })->name('admin-table');
+    Route::get('/product-details', [TabularController::class, 'getProductData'])->name('product-details');
+    Route::get('/admin-form', function () {
+        return inertia('Admin/Form');
+    })->name('admin-form');
     Route::post('/testing-token', function () {
         return response()->json(['message' => 'Successfull']);
     });

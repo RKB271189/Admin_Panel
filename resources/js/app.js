@@ -6,7 +6,6 @@ if (token) {
 
 import { createApp, h } from 'vue'
 import { createInertiaApp } from '@inertiajs/vue3'
-import { InertiaProgress } from '@inertiajs/progress'
 import { createVuetify } from 'vuetify'
 import 'vuetify/styles'
 import * as components from 'vuetify/components'
@@ -40,6 +39,12 @@ const vuetify = createVuetify({
     components
 })
 createInertiaApp({
+    progress: {
+        delay: 250,
+        color: '#48f0d4',
+        includeCSS: true,
+        showSpinner: false,
+    },
     resolve: (name) => {
         const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
         return pages[`./Pages/${name}.vue`]
@@ -53,4 +58,3 @@ createInertiaApp({
         setupAxiosInterceptors(store);
     },
 })
-InertiaProgress.init({ color: '#e08bb1' })

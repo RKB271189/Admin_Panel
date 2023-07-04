@@ -2,12 +2,12 @@
 
 namespace App\Repository\Product;
 
-use App\Models\Products;
+use App\Models\Product;
 use App\Repository\BaseRepository;
 
 final class ProductRepository extends BaseRepository implements ProductInterface
 {
-    public function __construct(Products $model)
+    public function __construct(Product $model)
     {
         $this->table = $model;
         parent::__construct($model);

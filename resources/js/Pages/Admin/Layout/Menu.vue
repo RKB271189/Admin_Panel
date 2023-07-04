@@ -88,7 +88,7 @@ export default {
           ],
         },
         { title: "Tables", icon: "mdi-table", url: "admin-table" },
-        { title: "Forms", icon: "mdi-form-select", url: "#" },
+        { title: "Forms", icon: "mdi-form-select", url: "admin-form" },
         { title: "Charts", icon: "mdi-chart-bar", url: "#" },
         { title: "Gallery", icon: "mdi-image-area", url: "#" },
       ],
