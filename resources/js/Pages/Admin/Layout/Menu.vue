@@ -8,7 +8,7 @@
           @click="toggleSubMenu(item)"
         >
           <v-list-item-content>
-            <v-list-item-title>
+            <v-list-item-title @click="redirectTo(item.url)">
               <v-icon>{{ item.icon }}</v-icon>
               <span class="menu-name">{{ item.title }}</span>
               <v-icon class="arrow-icon" v-if="item.submenu">{{
@@ -56,33 +56,41 @@ export default {
   },
   data() {
     return {
-      drawer: false,
+      drawer: true,
       selectedItem: null,
       selectedSubItem: null,
       menuItems: [
-        { title: "Dashboard", icon: "mdi-view-dashboard" },
+        {
+          title: "Dashboard",
+          icon: "mdi-view-dashboard",
+          url: "admin-dashboard",
+        },
         {
           title: "CMS",
           icon: "mdi-page-layout-body",
+          url: "#",
           submenu: [
-            { title: "Home", icon: "mdi-menu-right-outline" },
-            { title: "About", icon: "mdi-menu-right-outline" },
-            { title: "Contact", icon: "mdi-menu-right-outline" },
+            { title: "Home", icon: "mdi-menu-right-outline", url: "#" },
+            { title: "About", icon: "mdi-menu-right-outline", url: "#" },
+            { title: "Contact", icon: "mdi-menu-right-outline", url: "#" },
           ],
           open: false,
         },
-        { title: "Password", icon: "mdi-cog" },
+        { title: "Password", icon: "mdi-cog", url: "#" },
         {
           title: "Users",
           icon: "mdi-account-group",
+          url: "#",
           submenu: [
-            { title: "Student", icon: "mdi-menu-right-outline" },
-            { title: "Worker", icon: "mdi-menu-right-outline" },
-            { title: "Consultant", icon: "mdi-menu-right-outline" },
+            { title: "Student", icon: "mdi-menu-right-outline", url: "#" },
+            { title: "Worker", icon: "mdi-menu-right-outline", url: "#" },
+            { title: "Consultant", icon: "mdi-menu-right-outline", url: "#" },
           ],
         },
-        { title: "Tables", icon: "mdi-cog" },
-        { title: "Forms", icon: "mdi-cog" },
+        { title: "Tables", icon: "mdi-table", url: "admin-table" },
+        { title: "Forms", icon: "mdi-form-select", url: "#" },
+        { title: "Charts", icon: "mdi-chart-bar", url: "#" },
+        { title: "Gallery", icon: "mdi-image-area", url: "#" },
       ],
     };
   },
@@ -109,6 +117,9 @@ export default {
     },
     getSubMenuIcon(item) {
       return item.open ? "mdi-chevron-down" : "mdi-chevron-right";
+    },
+    redirectTo(url) {
+      this.$inertia.visit(url, { method: "get" });
     },
   },
 };

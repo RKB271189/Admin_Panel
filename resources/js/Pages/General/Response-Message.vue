@@ -1,18 +1,22 @@
 <template>
-  <v-snackbar
-    v-model="snackbar"
-    timeout="5000"
-    location="top right"
-    multi-line
-    :color="messageColor"
-  >
-    <v-alert
-      :icon="responseIcon"
-      :title="responseType"
-      :text="text"
-      variant="tonal"
-    ></v-alert>   
-  </v-snackbar>
+  <v-expand-transition>
+    <v-card v-show="expand2" class="mx-auto bg-secondary">
+      <v-snackbar
+        v-model="snackbar"
+        timeout="3000"
+        location="top right"
+        multi-line
+        :color="messageColor"
+      >
+        <v-alert
+          :icon="responseIcon"
+          :title="responseType"
+          :text="text"
+          variant="tonal"
+        ></v-alert>
+      </v-snackbar>
+    </v-card>
+  </v-expand-transition>
 </template>
   <script>
 export default {

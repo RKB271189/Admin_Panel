@@ -1,7 +1,7 @@
 function setupAxiosInterceptors(store) {
     axios.interceptors.request.use(
         (config) => {
-            const passportToken = store.state.VerifyUser.passportToken;           
+            const passportToken = store.state.VerifyUser.passportToken;
             if (passportToken) {
                 config.headers.Authorization = `Bearer ${passportToken}`;
             }
@@ -16,6 +16,9 @@ function setupAxiosInterceptors(store) {
             return response;
         },
         (error) => {
+            if (error.response.status === 401 && error.response.data.message === 'Unauthenticated.') {                
+                this.$inertia.visit("/login", { method: "get" });
+            }
             return Promise.reject(error);
         }
     );
