@@ -2,7 +2,8 @@
   <response-message
     v-if="hasError || hasSuccess"
     :errorFlag="hasError"
-    :responseMessage="errorMessage || successMessage"
+    :errorMessage="errorMessage"
+    :successMessage="successMessage"
   ></response-message>
   <v-container class="fill-height">
     <v-row align="center" justify="center">

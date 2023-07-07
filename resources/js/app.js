@@ -36,7 +36,7 @@ const vuetify = createVuetify({
         },
     },
     directives,
-    components
+    components,   
 })
 createInertiaApp({
     progress: {

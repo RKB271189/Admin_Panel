@@ -26,13 +26,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/admin-dashboard', function () {
         return inertia('Admin/Dashboard');
     })->name('admin-dashboard');
-    Route::get('/admin-table', function () {
-        return inertia('Admin/Tabular');
-    })->name('admin-table');
-    Route::get('/product-details', [TabularController::class, 'getProductData'])->name('product-details');
+    Route::get('/admin-table', [TabularController::class, 'index'])->name('admin-table');
     Route::get('/admin-form', function () {
         return inertia('Admin/Form');
     })->name('admin-form');
+    Route::get('/get-table-details', [TabularController::class, 'getTableDetails'])->name('get-table-details');
     Route::post('/testing-token', function () {
         return response()->json(['message' => 'Successfull']);
     });

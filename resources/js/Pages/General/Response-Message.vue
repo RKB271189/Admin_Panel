@@ -30,7 +30,8 @@ export default {
     };
   },
   props: {
-    responseMessage: null,
+    errorMessage: null,
+    successMessage: null,
     errorFlag: {
       type: Boolean,
       required: true,
@@ -41,12 +42,14 @@ export default {
       this.messageColor = "green-darken-2";
       this.responseType = "Success";
       this.responseIcon = "mdi-check-circle-outline";
+      this.text = this.successMessage;
+    } else {
+      let result = [];
+      for (let [key, value] of Object.entries(this.errorMessage)) {
+        result.push(`${value}`);
+      }
+      this.text = result.join("<br/>");
     }
-    let result = [];
-    for (let [key, value] of Object.entries(this.responseMessage)) {
-      result.push(`${value}`);
-    }
-    this.text = result.join("<br/>");
   },
 };
 </script>

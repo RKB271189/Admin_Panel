@@ -4,7 +4,7 @@ function initialState() {
         errorMessage: {},
         hasSuccess: false,
         successMessage: null,
-        passportToken: null
+        tabData: []
     }
 }
 const getters = {
@@ -12,21 +12,21 @@ const getters = {
     errorMessage: state => state.errorMessage,
     hasSuccess: state => state.hasSuccess,
     successMessage: state => state.successMessage,
-    passportToken: state => state.passportToken,
+    tabData: state => state.tabData
 }
 const actions = {
-    async VERIFY_USER_CREDENTIALS({ commit }, params) {
-        commit('RESET_RESPONSE_FLAG')
+    async GET_TABLE_DETAILS({ commit }, params) {
         try {
-            let res = await axios.post('/verify-user', params)
-            if (res.status === 200) {
-                commit('SET_PASSPORT_TOKEN', res.data.token)
+            commit('RESET_RESPONSE_FLAG')
+            let res = await axios.get('get-table-details', params);
+            if (res.status == 200) {
                 commit('SET_SUCCESS', res.data.message)
+                commit('SET_TAB_DETAILS', res.data.details)
             }
         } catch (error) {
             commit('SET_ERROR', error.response.data)
         }
-    },
+    }
 }
 const mutations = {
     RESET_RESPONSE_FLAG(state) {
@@ -41,8 +41,8 @@ const mutations = {
         state.hasSuccess = true
         state.successMessage = value
     },
-    SET_PASSPORT_TOKEN(state, value) {
-        state.passportToken = value
+    SET_TAB_DETAILS(state, value) {
+        state.tabData = value
     }
 }
 export default {
