@@ -1,17 +1,12 @@
+import { commonInitialState, commonGetters, commonMutations } from "../common"
 function initialState() {
     return {
-        hasError: false,
-        errorMessage: {},
-        hasSuccess: false,
-        successMessage: null,
+        ...commonInitialState,
         tabData: []
     }
 }
 const getters = {
-    hasError: state => state.hasError,
-    errorMessage: state => state.errorMessage,
-    hasSuccess: state => state.hasSuccess,
-    successMessage: state => state.successMessage,
+    ...commonGetters,
     tabData: state => state.tabData
 }
 const actions = {
@@ -29,18 +24,7 @@ const actions = {
     }
 }
 const mutations = {
-    RESET_RESPONSE_FLAG(state) {
-        state.hasError = false
-        state.hasSuccess = false
-    },
-    SET_ERROR(state, value) {
-        state.hasError = true
-        state.errorMessage = value
-    },
-    SET_SUCCESS(state, value) {
-        state.hasSuccess = true
-        state.successMessage = value
-    },
+    ...commonMutations,
     SET_TAB_DETAILS(state, value) {
         state.tabData = value
     }

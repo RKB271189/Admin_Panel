@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FormController;
 use App\Http\Controllers\TabularController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return inertia('Welcome');
+    return inertia('Auth/Login');
 });
 Route::get('/login', function () {
     return inertia('Auth/Login');
@@ -31,6 +32,7 @@ Route::middleware('auth:sanctum')->group(function () {
         return inertia('Admin/Form');
     })->name('admin-form');
     Route::get('/get-table-details', [TabularController::class, 'getTableDetails'])->name('get-table-details');
+    Route::post('/save-profile', [FormController::class, 'saveProfile'])->name('save-profile');
     Route::post('/testing-token', function () {
         return response()->json(['message' => 'Successfull']);
     });

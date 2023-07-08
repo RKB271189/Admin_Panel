@@ -48,7 +48,7 @@ class TabularController extends Controller
 
             return response()->json(['details' => $details], 200);
         } catch (Exception $ex) {
-            return response()->json(['error' => 'Something went wrong'], 200);
+            return response()->json(['error' => 'Something went wrong'], 500);
         }
     }
 }
