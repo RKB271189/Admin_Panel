@@ -8,10 +8,10 @@
 
 ### How to start implementing?
 
-1> Clone the repo from master
-2> run command : composer install for all laravel dependencies
-3> run command : npm install
-4> php artisan migrate
-5> php artisan db:seed
+## 1> Clone the repo from master
+## 2> run command : composer install for all laravel dependencies
+## 3> run command : npm install
+## 4> php artisan migrate
+## 5> php artisan db:seed
 
 ### This should work starting with the admin panel ###
