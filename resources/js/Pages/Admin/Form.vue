@@ -57,6 +57,7 @@
               class="me-4"
               type="button"
               color="primary"
+              @click="saveProfile"
               :disabled="isFormValidated"
             >
               Submit
@@ -72,6 +73,7 @@
 <script>
 import Header from "./Layout/Header.vue";
 import Menu from "./Layout/Menu.vue";
+import { mapGetters, mapActions } from "vuex";
 export default {
   components: {
     Header,
@@ -123,6 +125,9 @@ export default {
         profile_pic: this.profile_pic,
         company_size: this.company_size,
       };
+    },
+    async saveProfile() {
+      let params = this.getParams();
     },
     handleReset() {
       this.name = null;

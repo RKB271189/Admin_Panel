@@ -68,7 +68,7 @@ export default {
         {
           title: "CMS",
           icon: "mdi-page-layout-body",
-          url: "#",
+          url: "",
           submenu: [
             { title: "Home", icon: "mdi-menu-right-outline", url: "#" },
             { title: "About", icon: "mdi-menu-right-outline", url: "#" },
@@ -80,7 +80,7 @@ export default {
         {
           title: "Users",
           icon: "mdi-account-group",
-          url: "#",
+          url: "",
           submenu: [
             { title: "Student", icon: "mdi-menu-right-outline", url: "#" },
             { title: "Worker", icon: "mdi-menu-right-outline", url: "#" },
@@ -119,7 +119,9 @@ export default {
       return item.open ? "mdi-chevron-down" : "mdi-chevron-right";
     },
     redirectTo(url) {
-      this.$inertia.visit(url, { method: "get" });
+      if (url !== "") {
+        this.$inertia.visit(url, { method: "get" });
+      }
     },
   },
 };

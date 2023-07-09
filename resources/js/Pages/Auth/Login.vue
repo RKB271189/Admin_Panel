@@ -53,8 +53,13 @@
 
 <script>
 import ResponseMessage from "../General/Response-Message.vue";
-import { mapGetters, mapActions } from "vuex";
+import { mapActions } from "vuex";
+import { commonGettersMixin } from "../../mixins/response-message";
 export default {
+  components: {
+    ResponseMessage,
+  },
+  mixins: [commonGettersMixin("VerifyUser")],
   data() {
     return {
       loading: false,
@@ -71,16 +76,7 @@ export default {
       ],
     };
   },
-  components: {
-    ResponseMessage,
-  },
   computed: {
-    ...mapGetters("VerifyUser", [
-      "hasError",
-      "errorMessage",
-      "hasSuccess",
-      "successMessage",
-    ]),
     isFormValid() {
       return (
         this.emailRules.every((rule) => rule(this.email) === true) &&

@@ -4,7 +4,12 @@ export const commonInitialState = {
     hasSuccess: false,
     successMessage: null,
 }
-
+export const commonGetters = {
+    hasError: state => state.hasError,
+    errorMessage: state => state.errorMessage,
+    hasSuccess: state => state.hasSuccess,
+    successMessage: state => state.successMessage
+};
 export const commonMutations = {
     RESET_RESPONSE_FLAG(state) {
         state.hasError = false;
@@ -18,11 +23,4 @@ export const commonMutations = {
         state.hasSuccess = true;
         state.successMessage = value;
     }
-};
-
-export const commonGetters = {
-    hasError: state => state.hasError,
-    errorMessage: state => state.errorMessage,
-    hasSuccess: state => state.hasSuccess,
-    successMessage: state => state.successMessage
 };
