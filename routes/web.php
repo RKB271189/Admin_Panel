@@ -32,7 +32,8 @@ Route::middleware('auth:sanctum')->group(function () {
         return inertia('Admin/Form');
     })->name('admin-form');
     Route::get('/get-table-details', [TabularController::class, 'getTableDetails'])->name('get-table-details');
-    Route::post('/save-profile', [FormController::class, 'saveProfile'])->name('save-profile');
+    Route::post('/save-form-details', [FormController::class, 'saveFormDetails'])->name('save-form-details');
+    Route::get('',[])->name('');
     Route::post('/testing-token', function () {
         return response()->json(['message' => 'Successfull']);
     });

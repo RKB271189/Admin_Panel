@@ -8,6 +8,7 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class SaveRequest extends FormRequest
 {
@@ -31,8 +32,8 @@ class SaveRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'phone' => ['required', new Phone],
-            'image' => 'required|image|mimes:jpeg,png',
+            'phone' => ['required', Rule::unique('profiles', 'phone'), new Phone],
+            'profile_pic' => 'required|image|mimes:jpeg,png',
             'company_size' => 'required'
         ];
     }

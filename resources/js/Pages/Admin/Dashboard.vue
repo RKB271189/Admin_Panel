@@ -60,7 +60,7 @@
 import Header from "./Layout/Header.vue";
 import Menu from "./Layout/Menu.vue";
 import CountBox from "../General/Count-Box.vue";
-import { mapGetters, mapActions } from "vuex";
+import { mapActions } from "vuex";
 export default {
   data() {
     return {
@@ -75,7 +75,7 @@ export default {
   },
   methods: {
     ...mapActions("Dashboard", ["SOME_SERVER_ACTION"]),
-    async someAction() {      
+    async someAction() {
       this.loading = true;
       await this.SOME_SERVER_ACTION();
       this.loading = false;

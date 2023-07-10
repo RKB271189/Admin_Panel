@@ -21,7 +21,7 @@ final class ProfileRepository extends BaseRepository implements ProfileInterface
     {
         $records = [];
         if ($isreturn) {
-            $records = $this->CreateRecord($params, $issaved);
+            $records = $this->CreateRecord($params, $isreturn);
         } else {
             $this->InsertRecord($params);
         }

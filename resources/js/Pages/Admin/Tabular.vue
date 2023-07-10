@@ -42,6 +42,11 @@
                         </tr>
                       </thead>
                       <tbody>
+                        <tr>
+                          <td>
+                            <no-records></no-records>
+                          </td>
+                        </tr>
                         <tr v-for="(item, index) in tabData" :key="item.id">
                           <td>{{ index + 1 }}</td>
                           <td>{{ item.name }}</td>
@@ -65,6 +70,7 @@
 <script>
 import Header from "./Layout/Header.vue";
 import Menu from "./Layout/Menu.vue";
+import NoRecords from "../General/No-Records.vue";
 import { mapGetters, mapActions } from "vuex";
 export default {
   props: {
@@ -74,13 +80,13 @@ export default {
   components: {
     Header,
     Menu,
+    NoRecords,
   },
   data: () => ({
     pageName: "Tables",
     loading: false,
     tab: null,
     tabClicked: [],
-    itemsPerPage: 5,
   }),
   watch: {
     async tab(newTab) {
