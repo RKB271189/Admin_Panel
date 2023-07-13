@@ -42,11 +42,6 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>
-                            <no-records></no-records>
-                          </td>
-                        </tr>
                         <tr v-for="(item, index) in tabData" :key="item.id">
                           <td>{{ index + 1 }}</td>
                           <td>{{ item.name }}</td>
@@ -56,6 +51,9 @@
                         </tr>
                       </tbody>
                     </v-table>
+                  </v-col>
+                  <v-col md="12" v-if="tabData.length === 0 && !loading">
+                    <no-records></no-records>
                   </v-col>
                 </v-row>
               </v-container>

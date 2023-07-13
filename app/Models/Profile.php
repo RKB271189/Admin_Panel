@@ -15,4 +15,8 @@ class Profile extends Model
         'company_size',
         'profile_pic'
     ];
+    public function getProfilePicAttribute($value)
+    {
+        return 'storage/' . $value;
+    }
 }

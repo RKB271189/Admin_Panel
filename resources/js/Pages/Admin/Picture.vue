@@ -4,11 +4,20 @@
     <Menu :page-name="pageName"></Menu>
     <v-main>
       <v-container class="fluid">
-        <v-row no-gutters>
-          <v-col v-for="n in 3" :key="n" cols="12" sm="4">
-            <v-sheet class="ma-2 pa-2"> One of three columns </v-sheet>
-          </v-col>
-        </v-row>
+        <v-card class="bg-opacity-blue">
+          <v-row>
+            <v-col v-for="images in picture" :key="images.id" cols="12" sm="4">
+              <v-sheet class="ma-2 pa-2">
+                <v-img
+                  :src="images.profile_pic"
+                  max-height="125"
+                  cover
+                  class="bg-grey-lighten-2"
+                ></v-img>
+              </v-sheet>
+            </v-col>
+          </v-row>
+        </v-card>
       </v-container>
     </v-main>
   </v-app>
@@ -18,6 +27,9 @@
 import Header from "./Layout/Header.vue";
 import Menu from "./Layout/Menu.vue";
 export default {
+  props: {
+    picture: Array,
+  },
   data() {
     return {
       loading: false,

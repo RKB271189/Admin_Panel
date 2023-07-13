@@ -31,23 +31,27 @@
           </v-col>
         </v-row>
         <v-row>
-          <v-col cols="6" md="6">
+          <v-col cols="12" md="12">
             <v-card>
               <v-card-title class="alert-warning">
                 <span class="headline">Some Title</span>
-                <v-btn
-                  :loading="loading"
-                  class="flex-grow-1"
-                  height="48"
-                  variant="tonal"
-                  @click="someAction"
-                  style="float: right"
-                >
-                  <v-icon class="mr-1">mdi-login</v-icon>
-                  Some Action
-                </v-btn>
+                <v-dialog v-model="dialog" width="auto">
+                  <template v-slot:activator="{ props }">
+                    <v-btn
+                      class="flex-grow-1"
+                      height="48"
+                      variant="tonal"
+                      color="primary"
+                      v-bind="props"
+                      style="float: right"
+                    >
+                      <v-icon class="mr-1">mdi-login</v-icon>
+                      Some Action
+                    </v-btn>
+                  </template>
+                  <dashboard-form @close-dialog="closeDialog"></dashboard-form>
+                </v-dialog>
               </v-card-title>
-              <v-card-text></v-card-text>
             </v-card>
           </v-col>
         </v-row>
@@ -60,10 +64,12 @@
 import Header from "./Layout/Header.vue";
 import Menu from "./Layout/Menu.vue";
 import CountBox from "../General/Count-Box.vue";
+import DashboardForm from "./Dialogs/DashboardForm.vue";
 import { mapActions } from "vuex";
 export default {
   data() {
     return {
+      dialog: false,
       loading: false,
       pageName: "Dashboard",
     };
@@ -72,6 +78,7 @@ export default {
     Header,
     Menu,
     CountBox,
+    DashboardForm,
   },
   methods: {
     ...mapActions("Dashboard", ["SOME_SERVER_ACTION"]),
@@ -79,6 +86,9 @@ export default {
       this.loading = true;
       await this.SOME_SERVER_ACTION();
       this.loading = false;
+    },
+    closeDialog() {
+      this.dialog = false;
     },
   },
 };

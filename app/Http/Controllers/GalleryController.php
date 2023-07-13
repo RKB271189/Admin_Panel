@@ -15,6 +15,6 @@ class GalleryController extends Controller
     public function index()
     {
         $details = $this->profileRepository->Select();
-        return inertia('Admin/Picture', ['details' => $details]);
+        return inertia('Admin/Picture', ['picture' => $details]);
     }
 }

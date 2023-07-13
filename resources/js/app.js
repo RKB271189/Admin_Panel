@@ -11,6 +11,8 @@ import 'vuetify/styles'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 import '@mdi/font/css/materialdesignicons.css'
+import { QuillEditor } from '@vueup/vue-quill'
+import '@vueup/vue-quill/dist/vue-quill.snow.css';
 import store from './store'
 import setupAxiosInterceptors from './service/axios-interceptor'
 const customTheme = {
@@ -36,7 +38,7 @@ const vuetify = createVuetify({
         },
     },
     directives,
-    components,   
+    components,
 })
 createInertiaApp({
     progress: {
@@ -54,6 +56,7 @@ createInertiaApp({
         app.use(plugin);
         app.use(vuetify);
         app.use(store);
+        app.component('QuillEditor', QuillEditor)
         app.mount(el);
         setupAxiosInterceptors(store);
     },

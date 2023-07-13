@@ -14,12 +14,12 @@ class ImageService
     public function SaveImageFromWeb($image, string $folder, string &$fileName, string &$error)
     {
         try {
-            $filename = $folder . '/' . $fileName;
+            $fileName = $folder . '/' . $fileName;
             $img = Image::make($image);
             // $img->resize(500, 250);
             $img->stream();
             $error = '';
-            $isstored = $this->StoreImage($filename, $img, $error);
+            $isstored = $this->StoreImage($fileName, $img, $error);
             if (!$isstored) {
                 throw new Exception("Store Exception : " . __METHOD__ . " image store failed " . $error);
             }

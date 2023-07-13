@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer v-model="drawer" app>
+  <v-navigation-drawer v-model="drawer" app class="bg-opacity-blue">
     <v-list>
       <v-list-item-group v-model="selectedItem">
         <v-list-item
@@ -90,7 +90,7 @@ export default {
         { title: "Tables", icon: "mdi-table", url: "admin-table" },
         { title: "Forms", icon: "mdi-form-select", url: "admin-form" },
         { title: "Charts", icon: "mdi-chart-bar", url: "#" },
-        { title: "Gallery", icon: "mdi-image-area", url: "#" },
+        { title: "Gallery", icon: "mdi-image-area", url: "admin-gallery" },
       ],
     };
   },
