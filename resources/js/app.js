@@ -11,8 +11,11 @@ import 'vuetify/styles'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 import '@mdi/font/css/materialdesignicons.css'
-import { QuillEditor } from '@vueup/vue-quill'
-import '@vueup/vue-quill/dist/vue-quill.snow.css';
+import { QuillEditor, Quill } from '@vueup/vue-quill'
+import Mention from 'quill-mention'
+import 'quill-mention/dist/quill.mention.css'
+Quill.register("modules/mentions", Mention)
+import '@vueup/vue-quill/dist/vue-quill.snow.css'
 import store from './store'
 import setupAxiosInterceptors from './service/axios-interceptor'
 const customTheme = {

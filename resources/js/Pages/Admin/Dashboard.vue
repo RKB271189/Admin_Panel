@@ -35,7 +35,7 @@
             <v-card>
               <v-card-title class="alert-warning">
                 <span class="headline">Some Title</span>
-                <v-dialog v-model="dialog" width="auto">
+                <v-dialog v-model="dialog" width="60%">
                   <template v-slot:activator="{ props }">
                     <v-btn
                       class="flex-grow-1"
@@ -45,11 +45,14 @@
                       v-bind="props"
                       style="float: right"
                     >
-                      <v-icon class="mr-1">mdi-login</v-icon>
-                      Some Action
+                      <v-icon class="mr-1">mdi-alert-outline</v-icon>
+                      Open Dialog
                     </v-btn>
                   </template>
-                  <dashboard-form @close-dialog="closeDialog"></dashboard-form>
+                  <dashboard-form
+                    @close-dialog="closeDialog"
+                    @save-dialog="saveDialog"
+                  ></dashboard-form>
                 </v-dialog>
               </v-card-title>
             </v-card>
@@ -90,6 +93,7 @@ export default {
     closeDialog() {
       this.dialog = false;
     },
+    saveDialog() {},
   },
 };
 </script>

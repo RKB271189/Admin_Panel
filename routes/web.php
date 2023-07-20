@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\TabularController;
@@ -25,9 +26,7 @@ Route::get('/login', function () {
 })->name('login');
 Route::post('/verify-user', [AuthController::class, 'login'])->name('verify-user');
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/admin-dashboard', function () {
-        return inertia('Admin/Dashboard');
-    })->name('admin-dashboard');
+    Route::get('/admin-dashboard', [DashboardController::class, 'index'])->name('admin-dashboard');
     Route::get('/admin-table', [TabularController::class, 'index'])->name('admin-table');
     Route::get('/admin-form', function () {
         return inertia('Admin/Form');

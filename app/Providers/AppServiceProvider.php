@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Repository\Editor\EditorInterface;
+use App\Repository\Editor\EditorRepository;
 use App\Repository\Product\ProductInterface;
 use App\Repository\Product\ProductRepository;
 use App\Repository\Profile\ProfileInterface;
@@ -17,6 +19,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind(ProductInterface::class, ProductRepository::class);
         $this->app->bind(ProfileInterface::class, ProfileRepository::class);
+        $this->app->bind(EditorInterface::class, EditorRepository::class);
     }
 
     /**
