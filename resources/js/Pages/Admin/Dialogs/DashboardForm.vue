@@ -52,7 +52,6 @@ export default {
       isContentValid: false,
       editorOptions: {
         modules: {
-          mentions: Mention,
           toolbar: [
             [{ header: [1, 2, false] }],
             ["bold", "italic", "underline", "strike"],
@@ -60,32 +59,32 @@ export default {
             ["link"],
             ["clean"],
           ],
-        },
-        mention: {
-          allowedChars: /^[a-zA-Z0-9_]*$/,
-          mentionDenotationChars: ["@"],
-          renderItem: (item) => {
-            return item.display;
-          },
-          source: (searchTerm, renderList, mentionChar) => {
-            let values = [
-              { id: 1, value: "Admin", display: "Admin" },
-              { id: 2, value: "Rahul", display: "Rahul" },
-            ];
+          mention: {
+            allowedChars: /^[a-zA-Z0-9_]*$/,
+            mentionDenotationChars: ["@"],
+            renderItem: (item) => {
+              return item.display;
+            },
+            source: (searchTerm, renderList, mentionChar) => {
+              let values = [
+                { id: 1, value: "Admin", display: "Admin" },
+                { id: 2, value: "Rahul", display: "Rahul" },
+              ];
 
-            if (searchTerm.length === 0) {
-              renderList(values, searchTerm);
-            } else {
-              const matches = [];
-              for (let i = 0; i < values.length; i++)
-                if (
-                  ~values[i].value
-                    .toLowerCase()
-                    .indexOf(searchTerm.toLowerCase())
-                )
-                  matches.push(values[i]);
-              renderList(matches, searchTerm);
-            }
+              if (searchTerm.length === 0) {
+                renderList(values, searchTerm);
+              } else {
+                const matches = [];
+                for (let i = 0; i < values.length; i++)
+                  if (
+                    ~values[i].value
+                      .toLowerCase()
+                      .indexOf(searchTerm.toLowerCase())
+                  )
+                    matches.push(values[i]);
+                renderList(matches, searchTerm);
+              }
+            },
           },
         },
         placeholder: "Enter your content here",
