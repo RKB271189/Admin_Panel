@@ -2,7 +2,7 @@ import { commonInitialState, commonGetters, commonMutations } from "../common"
 function initialState() {
     return {
         ...commonInitialState,
-        tabData: []
+        tabData: {}
     }
 }
 const getters = {

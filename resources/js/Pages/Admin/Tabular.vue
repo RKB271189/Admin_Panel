@@ -42,8 +42,8 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr v-for="(item, index) in tabData" :key="item.id">
-                          <td>{{ index + 1 }}</td>
+                        <tr v-for="item in tabData.data" :key="item.id">
+                          <td>{{ item.id }}</td>
                           <td>{{ item.name }}</td>
                           <td>{{ item.price }}</td>
                           <td>{{ item.color }}</td>
@@ -51,6 +51,17 @@
                         </tr>
                       </tbody>
                     </v-table>
+                    <div class="text-center">
+                      <v-pagination
+                        v-if="!loading && tabData.length !== 0"
+                        class="mt-2"
+                        v-model="currentPage"
+                        :length="totalPage"
+                        @update:model-value="onPageChange"
+                        prev-icon="mdi-menu-left"
+                        next-icon="mdi-menu-right"
+                      ></v-pagination>
+                    </div>
                   </v-col>
                   <v-col md="12" v-if="tabData.length === 0 && !loading">
                     <no-records></no-records>
@@ -85,16 +96,17 @@ export default {
     loading: false,
     tab: null,
     tabClicked: [],
+    currentPage: 1,
+    totalPage: 0,
   }),
   watch: {
-    async tab(newTab) {
-      this.loading = true;
-      this.tabClicked.push(newTab);
+    tab() {
+      this.tabClicked.push(this.tab);
       let params = {
-        tab: newTab,
+        tab: this.tab,
+        page: this.currentPage,
       };
-      await this.GET_TABLE_DETAILS({ params: params });
-      this.loading = false;
+      this.getTabDetails(params);
     },
   },
   computed: {
@@ -106,6 +118,22 @@ export default {
   },
   methods: {
     ...mapActions("Tabular", ["GET_TABLE_DETAILS"]),
+    async getTabDetails(params) {
+      this.loading = true;
+      await this.GET_TABLE_DETAILS({ params: params });
+      this.loading = false;
+      if (Object.keys(this.tabData).length > 0) {      
+        this.totalPage = this.tabData.last_page;
+        this.currentPage = this.tabData.current_page;
+      }
+    },
+    onPageChange(newPage) {
+      let params = {
+        tab: this.tab,
+        page: newPage,
+      };
+      this.getTabDetails(params);
+    },
   },
 };
 </script>

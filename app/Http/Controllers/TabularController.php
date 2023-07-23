@@ -24,16 +24,17 @@ class TabularController extends Controller
     public function getTableDetails(Request $request)
     {
         try {
-            $params = $request->input('tab');
-            $tab = strtolower($params);
+            $params = $request->only('tab', 'page');
+            $tab = strtolower($params['tab']);
+            $page = $params['page'];
             switch ($tab) {
                 case 'tab-1':
-                    if (Cache::has('Tab_Details')) {
-                        $details = Cache::get('Tab_Details');
-                    } else {
-                        $details = $this->productRepository->Select();
-                        Cache::put('Tab_Details', $details, now()->addYear(10));
-                    }
+                    // if (Cache::has('Tab_Details')) {
+                    //     $details = Cache::get('Tab_Details');
+                    // } else {
+                    $details = $this->productRepository->PaginateProduct(10, $page);
+                    //     Cache::put('Tab_Details', $details, now()->addYear(10));
+                    // }
                     break;
                 case 'tab-2':
                     $details = [];
@@ -46,7 +47,7 @@ class TabularController extends Controller
                     break;
             }
 
-            return response()->json(['details' => $details], 200);
+            return response()->json(['message' => 'Details fetched successfully', 'details' => $details], 200);
         } catch (Exception $ex) {
             return response()->json(['error' => 'Something went wrong'], 500);
         }

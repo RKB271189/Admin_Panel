@@ -98,4 +98,16 @@ final class ProductRepository extends BaseRepository implements ProductInterface
     {
         return $this->GetAllDeleted();
     }
+    /**
+     * Get details based on pagination value
+     * @return null|array
+     */
+    public function PaginateProduct(int $pgValue, int $currentPage): ?array
+    {
+        $details = $this->table::paginate($pgValue, ['*'], 'page', $currentPage);
+        if ($details) {
+            return $details->toArray();
+        }
+        return null;
+    }
 }
